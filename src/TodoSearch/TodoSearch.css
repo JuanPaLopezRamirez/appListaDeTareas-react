@@ -1,0 +1,15 @@
+
+.TodoSearch-input{
+  width: 50%;
+  height: 50px;
+  padding: 0 10px;
+  margin: 30px auto;
+  border-radius: 5px;
+  justify-self:center;
+  align-self: center;
+  border: 1px solid #bc6c25;
+}
+
+.TodoSearch-input:focus{
+  outline-color: black;
+}

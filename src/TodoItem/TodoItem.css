@@ -1,0 +1,29 @@
+
+.TodoItem{
+  padding: 5px;
+  margin: 5px 0;
+  min-height: 60px;
+  border-radius: 10px;
+  background-color: #dda15e;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.TodoItem span{
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.TodoItem-p--completed{
+  text-decoration:line-through;
+}
+
+.Icon-check--active{
+  color: #4caf50;
+}
+
+.Icon-delete:hover{
+  color: red;
+}
