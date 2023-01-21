@@ -1,38 +1,38 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { TodoContext  } from '../TodoContext';
 import { TodoCounter } from '../TodoCounter';
 import { TodoSearch } from '../TodoSearch';
 import { TodoList } from '../TodoList';
 import { TodoItem } from '../TodoItem';
 import { CreateTodoButton } from '../CreateTodoButton';
+import { Modal } from '../Modal/index';
+import { TodoForm } from '../TodoForm';
+import { TodoError } from '../TodoError/index';
+import { TodoLoading } from '../TodoLoading/index';
+import { EmptyTodo } from '../EmptyTodo/index';
 
 
-function AppUI({
-  loading,
-  error,
-  totalTodos,
-  completedTodos,
-  searchValue,
-  setSearchValue,
-  searchedTodos,
-  completeTodo,
-  deleteTodo,
-}){
+// este componente contiene toda la UI de la aplicacion
+// hace el llamado a todos los componentes que usamos
+function AppUI(){
+  const {error,
+    loading,
+    searchedTodos,
+    completeTodo,
+    deleteTodo,
+    openModal,
+    setOpenModal
+    } = useContext(TodoContext); // recibimos el contexto
+
   return(
     <React.Fragment>
-      <TodoCounter
-        total={totalTodos}
-        completed={completedTodos}
-      />
-
-      <TodoSearch 
-        searchValue={searchValue}
-        setSearchValue={setSearchValue} 
-      />
+      <TodoCounter />
+      <TodoSearch />
 
       <TodoList>
-        {error && <p>Desesperate, hubo un error</p>}
-        {loading && <p>Estamos cargando ...</p>}
-        {(!loading && !searchedTodos.length) && <p>Crea tu primer Tarea</p>}
+        {error && <TodoError error={error} />}
+        {loading && <TodoLoading />}
+        {(!loading && !searchedTodos.length) && <EmptyTodo />}
 
         {searchedTodos.map(todo=>(
           <TodoItem 
@@ -42,10 +42,20 @@ function AppUI({
             onComplete={()=> completeTodo(todo.text)}
             onDelete={()=> deleteTodo(todo.text)}
           />
-        ))}
+          ))
+        }
       </TodoList>
 
-      <CreateTodoButton />
+      {!!openModal && (
+        <Modal>
+          <TodoForm />
+        </Modal>
+      )}
+
+      <CreateTodoButton 
+        setOpenModal={setOpenModal}
+        openModal={openModal}
+      />
     </React.Fragment>
   );
 }

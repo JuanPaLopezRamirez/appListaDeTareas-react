@@ -2,6 +2,7 @@ import { useState, useEffect} from "react";
 
 // Custom react Hook
 function useLocalStorage(itemName,initialValue){
+
   const [loading,setLoading]= useState(true);
   const [error,setError]= useState(false);
   const [item, setItem] = useState(initialValue);
@@ -25,7 +26,7 @@ function useLocalStorage(itemName,initialValue){
       } catch (error) {
         setError(error);
       }
-    },1000);
+    },4000);
   });
 
 

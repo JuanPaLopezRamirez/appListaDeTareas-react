@@ -1,14 +1,18 @@
 import React, { useState, createContext } from "react";
 import { useLocalStorage } from './useLocalStorage';
 
-
+// creamos un contexto
 const TodoContext= createContext();
 
+
+// este componente contiene la logica de nuestra aplicacion
+// todo lo referente a eliminacion de tareas, a marcar si esta completada
+// tambien la parte de buscar las tareas y que te filtre la busqueda
 function TodoProvider(props){
   //como usamos un objeto tenemos que avisarle que item ahora es todos ...
   const {item:todos,saveItem:saveTodos,loading,error}= useLocalStorage('TODOS_V1',[]);
-
   const [searchValue,setSearchValue] = useState('');
+  const [openModal,setOpenModal] = useState(false);
 
   const completedTodos = todos.filter(todo=> !!todo.completed).length;
   const totalTodos = todos.length;
@@ -34,6 +38,16 @@ function TodoProvider(props){
     saveTodos(newTodos);
   };
 
+  const addTodo=(text)=>{
+    const newTodos = [...todos];
+    newTodos.push({
+      text,
+      completed: false,
+    });
+
+    saveTodos(newTodos);
+  }
+
   const deleteTodo=(texto)=>{
     const todoIndex = todos.findIndex(todo=> todo.text ===texto);
     const newTodos = [...todos];
@@ -41,7 +55,7 @@ function TodoProvider(props){
     saveTodos(newTodos);
   };
 
-  return(
+  return( 
     <TodoContext.Provider value={{
       /*valores a compartir*/
       loading,
@@ -53,6 +67,9 @@ function TodoProvider(props){
       searchedTodos,
       completeTodo,
       deleteTodo,
+      openModal,
+      setOpenModal,
+      addTodo
     }}>
       {props.children}
     </TodoContext.Provider>
