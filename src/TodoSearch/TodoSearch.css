@@ -13,3 +13,7 @@
 .TodoSearch-input:focus{
   outline-color: black;
 }
+
+.TodoSearch-input:disabled{
+  opacity: 30%;
+}

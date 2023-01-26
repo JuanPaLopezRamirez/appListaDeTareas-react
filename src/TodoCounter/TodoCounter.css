@@ -1,7 +1,11 @@
 
-.TodoCounter-title{
+.TodoCounter__title{
   font-size: 24px;
   text-align: center;
   margin: 0;
   padding: 48px;
+}
+
+.TodoCounter__title--opacity{
+  opacity: 30%;
 }

@@ -1,0 +1,44 @@
+
+.ChangeAlert__bg{
+  position: fixed;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  background: #1e1e1fa2;
+  z-index: 1;
+}
+
+.ChangeAlert__container{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ChangeAlert--content{
+  background-color: #dda15e;
+  text-align: center;
+  line-height: 30px;
+  padding: 40px;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.ChangeAlert-Button--update{
+  width: 100px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 10px;
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #dde15e;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.ChangeAlert-Button--update:hover{
+  transform: scale(1.1);
+}

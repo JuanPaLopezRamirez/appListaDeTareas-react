@@ -1,4 +1,7 @@
-import React, { useContext } from 'react';
+// EN COMPOSICION DE COMPONENTES SIN REACT CONTEXT 
+// NO REQUERIMOS DEL COMPONENTE AppUI
+
+/* import React, { useContext } from 'react';
 import { TodoContext  } from '../TodoContext';
 import { TodoCounter } from '../TodoCounter';
 import { TodoSearch } from '../TodoSearch';
@@ -10,6 +13,7 @@ import { TodoForm } from '../TodoForm';
 import { TodoError } from '../TodoError/index';
 import { TodoLoading } from '../TodoLoading/index';
 import { EmptyTodo } from '../EmptyTodo/index';
+import { TodoHeader } from '../TodoHeader/index';
 
 
 // este componente contiene toda la UI de la aplicacion
@@ -21,13 +25,26 @@ function AppUI(){
     completeTodo,
     deleteTodo,
     openModal,
-    setOpenModal
+    setOpenModal,
+    totalTodos,
+    completedTodos,
+    searchValue,
+    setSearchValue,
     } = useContext(TodoContext); // recibimos el contexto
 
   return(
     <React.Fragment>
-      <TodoCounter />
-      <TodoSearch />
+
+      <TodoHeader>
+        <TodoCounter
+          totalTodos={totalTodos}
+          completedTodos={completedTodos}
+        />
+        <TodoSearch
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+        />
+      </TodoHeader>
 
       <TodoList>
         {error && <TodoError error={error} />}
@@ -60,4 +77,4 @@ function AppUI(){
   );
 }
 
-export {AppUI};
+export {AppUI}; */

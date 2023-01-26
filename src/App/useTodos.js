@@ -1,18 +1,15 @@
-// USANDO COMPOSICION DE COMPONENTES NO REQUERIMOS DE ESTE ARCHIVO
-/* 
-import React, { useState, createContext } from "react";
+import { useState } from "react";
 import { useLocalStorage } from './useLocalStorage';
 
-// creamos un contexto
-const TodoContext= createContext();
 
-
-// este componente contiene la logica de nuestra aplicacion
-// todo lo referente a eliminacion de tareas, a marcar si esta completada
-// tambien la parte de buscar las tareas y que te filtre la busqueda
-function TodoProvider({children}){
-  //como usamos un objeto tenemos que avisarle que item ahora es todos ...
-  const {item:todos,saveItem:saveTodos,loading,error}= useLocalStorage('TODOS_V1',[]);
+function useTodos(){
+  const {
+    item:todos,
+    saveItem:saveTodos,
+    loading,
+    error,
+    sincronizeItem:sincronizeTodos,
+  }= useLocalStorage('TODOS_V1',[]);
   const [searchValue,setSearchValue] = useState('');
   const [openModal,setOpenModal] = useState(false);
 
@@ -57,9 +54,8 @@ function TodoProvider({children}){
     saveTodos(newTodos);
   };
 
-  return( 
-    <TodoContext.Provider value={{
-      //valores a compartir
+  return(
+    {/*propiedades guardadas en nuestro custom Hook*/
       loading,
       error,
       totalTodos,
@@ -71,12 +67,10 @@ function TodoProvider({children}){
       deleteTodo,
       openModal,
       setOpenModal,
-      addTodo
-    }}>
-      {children}
-    </TodoContext.Provider>
-  )
+      addTodo,
+      sincronizeTodos
+    }
+  );
 }
 
-export { TodoContext, TodoProvider };
- */
+export { useTodos };

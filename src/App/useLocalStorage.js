@@ -1,12 +1,12 @@
-/* ESTE ARCHIVO EN COMPOSICION DE COMPONENTES SE USA EN OTRA 
-CARPETA, POR LO TANTO SE COMENTA TODO EL ARCHIVO EN LA CARPETA 
-TodoContext */
-/*
+/* Este useLocalStorage es la copia del useLocalStorage 
+de la carpeta TodoContext */
+
 import { useState, useEffect} from "react";
 
 // Custom react Hook
 function useLocalStorage(itemName,initialValue){
 
+  const [sincronizedItem,setSincronizedItem] = useState(true);
   const [loading,setLoading]= useState(true);
   const [error,setError]= useState(false);
   const [item, setItem] = useState(initialValue);
@@ -26,12 +26,12 @@ function useLocalStorage(itemName,initialValue){
 
         setItem(parsedItem);
         setLoading(false);//ya termino de cargar la App
-
+        setSincronizedItem(true);// cargo todo y esta sincronizado
       } catch (error) {
         setError(error);
       }
     },4000);
-  });
+  },[sincronizedItem]);// por ahora lo dejamos asi, asi EsLint no marque un error
 
 
   const saveItem=(newItem)=>{
@@ -44,8 +44,18 @@ function useLocalStorage(itemName,initialValue){
     }
   }
 
-  return {item,saveItem,loading,error};
+  const sincronizeItem= ()=>{
+    setLoading(true); // para estar en el estado de carga
+    setSincronizedItem(false); // decimos que no estamos sincronizados
+  };
+
+  return {
+    item,
+    saveItem,
+    loading,
+    error,
+    sincronizeItem,
+  };
 }
 
 export { useLocalStorage };
- */
